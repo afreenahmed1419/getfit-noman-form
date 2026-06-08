@@ -16,7 +16,6 @@
     --text:#f4f4f3;
     --muted:#8d8d92;
     --volt:#cdff3a;
-    --volt-dim:#9bbf2c;
     --radius:14px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -30,20 +29,9 @@
   .wrap{max-width:760px;margin:0 auto;padding:0 22px;}
 
   /* HEADER */
-  header.hero{
-    padding:64px 0 40px;
-    text-align:left;
-    border-bottom:1px solid var(--line);
-    margin-bottom:40px;
-  }
-  .badge{
-    display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--bg);background:var(--volt);padding:6px 12px;border-radius:100px;font-weight:700;margin-bottom:22px;
-  }
-  h1.title{
-    font-family:'Anton',sans-serif;font-weight:400;line-height:0.95;text-transform:uppercase;
-    font-size:clamp(40px,9vw,76px);letter-spacing:1px;
-  }
+  header.hero{padding:64px 0 40px;text-align:left;border-bottom:1px solid var(--line);margin-bottom:40px;}
+  .badge{display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--bg);background:var(--volt);padding:6px 12px;border-radius:100px;font-weight:700;margin-bottom:22px;}
+  h1.title{font-family:'Anton',sans-serif;font-weight:400;line-height:0.95;text-transform:uppercase;font-size:clamp(40px,9vw,76px);letter-spacing:1px;}
   h1.title span{color:var(--volt);}
   .sub{color:var(--muted);font-size:16px;line-height:1.6;margin-top:18px;max-width:560px;}
 
@@ -52,6 +40,8 @@
   .progress-track{height:6px;background:var(--panel-2);border-radius:100px;overflow:hidden;}
   .progress-fill{height:100%;width:0%;background:var(--volt);border-radius:100px;transition:width .35s ease;}
   .progress-label{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:1px;text-transform:uppercase;}
+  .autosave-indicator{font-size:11px;color:#8bb72a;margin-top:6px;letter-spacing:.5px;text-transform:uppercase;opacity:0;transition:opacity .3s;pointer-events:none;}
+  .autosave-indicator.show{opacity:1;}
 
   /* SECTIONS */
   .section{margin-bottom:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);overflow:hidden;}
@@ -63,13 +53,9 @@
   .q{margin-top:24px;}
   .q:first-child{margin-top:6px;}
   label.qlabel{display:block;font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px;}
-  label.qlabel .star{color:var(--volt);}
   .hint{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:3px;}
 
-  input[type=text],textarea{
-    width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
-    color:var(--text);font-family:'Archivo',sans-serif;font-size:15px;padding:13px 15px;transition:border .2s,background .2s;
-  }
+  input[type=text],textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;color:var(--text);font-family:'Archivo',sans-serif;font-size:15px;padding:13px 15px;transition:border .2s,background .2s;}
   textarea{resize:vertical;min-height:96px;line-height:1.55;}
   input[type=text]:focus,textarea:focus{outline:none;border-color:var(--volt);background:#161618;}
   input::placeholder,textarea::placeholder{color:#5c5c61;}
@@ -87,126 +73,69 @@
 
   /* SUBMIT */
   .submit-row{margin-top:32px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
-  button.cta{
-    font-family:'Anton',sans-serif;font-size:20px;letter-spacing:1.5px;text-transform:uppercase;
-    background:var(--volt);color:var(--bg);border:none;border-radius:100px;padding:16px 44px;cursor:pointer;
-    transition:transform .12s ease, box-shadow .2s ease;box-shadow:0 0 0 rgba(205,255,58,0);
-  }
+  button.cta{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:1.5px;text-transform:uppercase;background:var(--volt);color:var(--bg);border:none;border-radius:100px;padding:16px 44px;cursor:pointer;transition:transform .12s ease, box-shadow .2s ease;}
   button.cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(205,255,58,0.25);}
   button.cta:active{transform:translateY(0);}
   button.cta:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
-  .form-note{font-size:13px;color:var(--muted);}
+  .form-note{font-size:13px;color:var(--muted);line-height:1.5;}
+  .btn-ghost{font-family:'Archivo';font-weight:700;font-size:15px;background:var(--panel-2);color:var(--text);border:1px solid var(--line);border-radius:100px;padding:14px 28px;cursor:pointer;transition:border .2s;}
+  .btn-ghost:hover{border-color:var(--volt);}
 
   /* THANK YOU */
-  .thanks{display:none;text-align:center;padding:80px 0;}
-  .thanks .check{font-family:'Anton';font-size:64px;color:var(--volt);}
+  .thanks{display:none;text-align:center;padding:70px 0;}
+  .thanks .check{font-family:'Anton';font-size:64px;color:var(--volt);line-height:1;}
   .thanks h2{font-family:'Anton';font-size:clamp(34px,7vw,56px);text-transform:uppercase;margin:12px 0;}
-  .thanks p{color:var(--muted);font-size:16px;line-height:1.6;max-width:440px;margin:0 auto;}
-
-  /* OWNER / RESPONSES VIEW */
-  .owner-link{position:fixed;bottom:16px;right:16px;font-size:11px;color:#3a3a40;letter-spacing:1px;text-transform:uppercase;cursor:pointer;z-index:50;background:var(--panel);border:1px solid var(--line);padding:6px 11px;border-radius:100px;}
-  .owner-link:hover{color:var(--muted);}
-  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:20px;}
-  .modal.open{display:flex;}
-  .modal-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px;max-width:380px;width:100%;}
-  .modal-card h3{font-family:'Anton';font-size:24px;text-transform:uppercase;margin-bottom:16px;}
-  .modal-card input{margin-bottom:14px;}
-  .modal-actions{display:flex;gap:10px;}
-  .btn-sm{font-family:'Archivo';font-weight:700;font-size:14px;border:none;border-radius:8px;padding:11px 18px;cursor:pointer;}
-  .btn-primary{background:var(--volt);color:var(--bg);}
-  .btn-ghost{background:var(--panel-2);color:var(--text);border:1px solid var(--line);}
-  .pw-err{color:#ff6b6b;font-size:13px;margin-bottom:10px;display:none;}
-
-  .owner-view{display:none;}
-  .owner-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line);margin-bottom:24px;}
-  .owner-bar h2{font-family:'Anton';font-size:32px;text-transform:uppercase;}
-  .owner-bar .count{color:var(--volt);}
-  .resp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
-  .resp-tab{font-size:13px;padding:8px 14px;border-radius:100px;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);cursor:pointer;}
-  .resp-tab.active{background:var(--volt);color:var(--bg);border-color:var(--volt);font-weight:700;}
-  .resp-section{margin-bottom:26px;}
-  .resp-section .rs-head{font-family:'Anton';font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--volt);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:14px;}
-  .resp-q{margin-bottom:16px;}
-  .resp-q .rq{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:5px;}
-  .resp-q .ra{font-size:15px;line-height:1.55;white-space:pre-wrap;}
-  .resp-q .ra.empty{color:#5c5c61;font-style:italic;}
-  .owner-actions{display:flex;gap:10px;flex-wrap:wrap;}
-  .empty-state{text-align:center;color:var(--muted);padding:60px 0;font-size:16px;}
-  .loading{text-align:center;color:var(--muted);padding:40px 0;}
+  .thanks p{color:var(--muted);font-size:16px;line-height:1.6;max-width:460px;margin:0 auto;}
+  .thanks-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0 18px;}
 </style>
 </head>
 <body>
-
 <div class="wrap">
 
-  <!-- ===== FORM VIEW (what Noman sees) ===== -->
+  <!-- ===== FORM VIEW ===== -->
   <div id="formView">
     <header class="hero">
       <span class="badge">Project Discovery</span>
       <h1 class="title">Let's Build<br><span>Get Fit</span> by Noman</h1>
-      <p class="sub">A few questions to understand your vision. Answer in as much detail as you can — there are no wrong answers, and the more you share, the better the final site. Takes about 10–15 minutes.</p>
+      <p class="sub">A few questions to understand your vision. Answer in as much detail as you can — the more you share, the better the final site. Takes about 10–15 minutes. Your progress saves automatically, so you can close this and come back anytime.</p>
     </header>
 
     <div class="progress-shell">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-label" id="progressLabel">0% complete</div>
+      <div class="autosave-indicator" id="autosaveIndicator">✓ Progress saved</div>
     </div>
 
     <form id="questionnaire"></form>
 
     <div class="submit-row">
       <button type="button" class="cta" id="submitBtn">Submit Answers</button>
-      <p class="form-note">Your responses are sent straight to Afreen. You won't be able to edit after submitting, so review before you hit submit.</p>
+      <p class="form-note">When you tap submit, your answers open in WhatsApp ready to send to Afreen. Just hit send and you're done.</p>
     </div>
   </div>
 
   <!-- ===== THANK YOU ===== -->
   <div class="thanks" id="thanksView">
     <div class="check">✓</div>
-    <h2>You're All Set</h2>
-    <p>Thanks, Noman! Your answers have been received. Afreen will review everything and get back to you with the next steps for your site.</p>
-  </div>
-
-  <!-- ===== OWNER VIEW (what Afreen sees) ===== -->
-  <div class="owner-view" id="ownerView">
-    <div class="owner-bar">
-      <h2>Responses <span class="count" id="respCount"></span></h2>
-      <div class="owner-actions">
-        <button class="btn-sm btn-primary" id="downloadBtn">Download .txt</button>
-        <button class="btn-sm btn-ghost" id="copyBtn">Copy All</button>
-        <button class="btn-sm btn-ghost" id="backToForm">Back to Form</button>
-      </div>
+    <h2>One Last Tap</h2>
+    <p>WhatsApp should now be open with all your answers. Just hit <b>send</b> to deliver them to Afreen — that's it!</p>
+    <div class="thanks-actions">
+      <button class="cta" id="resendBtn">Open WhatsApp</button>
+      <button class="btn-ghost" id="copyBtn">Copy answers instead</button>
     </div>
-    <div class="resp-tabs" id="respTabs"></div>
-    <div id="respContent"><div class="loading">Loading responses…</div></div>
+    <p class="form-note">Didn't open? Tap "Open WhatsApp" above. Or copy your answers and paste them into your chat with Afreen.</p>
   </div>
 
-</div>
-
-<!-- Owner access trigger -->
-<div class="owner-link" id="ownerTrigger">Owner Access</div>
-
-<!-- Password modal -->
-<div class="modal" id="pwModal">
-  <div class="modal-card">
-    <h3>Owner Access</h3>
-    <p class="pw-err" id="pwErr">Wrong passcode. Try again.</p>
-    <input type="text" id="pwInput" placeholder="Enter passcode" autocomplete="off">
-    <div class="modal-actions">
-      <button class="btn-sm btn-primary" id="pwSubmit">View Responses</button>
-      <button class="btn-sm btn-ghost" id="pwCancel">Cancel</button>
-    </div>
-  </div>
 </div>
 
 <script>
 /* ============================================================
-   PASSCODE — change this to anything you like
+   CONFIG — Afreen's WhatsApp number (digits only, with country code)
    ============================================================ */
-const OWNER_PASSCODE = "noman123";
+const WHATSAPP_NUMBER = "917063164720";
 
 /* ============================================================
-   QUESTION STRUCTURE
+   QUESTIONS
    ============================================================ */
 const SECTIONS = [
   {
@@ -299,13 +228,13 @@ SECTIONS.forEach((sec, i) => {
     } else if(q.type === "text"){
       field = `<input type="text" data-qid="${q.id}" placeholder="Type your answer…">`;
     } else if(q.type === "radio"){
-      field = `<div class="opts">` + q.options.map((o,idx)=>`
+      field = `<div class="opts">` + q.options.map(o=>`
         <label class="opt">
           <input type="radio" name="${q.id}" value="${o}" data-qid="${q.id}">
           <span>${o}</span>
         </label>`).join("") + `</div>`;
     } else if(q.type === "checkbox"){
-      field = `<div class="opts">` + q.options.map((o,idx)=>`
+      field = `<div class="opts">` + q.options.map(o=>`
         <label class="opt">
           <input type="checkbox" name="${q.id}" value="${o}" data-qid="${q.id}">
           <span>${o}</span>
@@ -322,7 +251,7 @@ SECTIONS.forEach((sec, i) => {
   });
 });
 
-/* checked-state styling for options */
+/* checked-state styling + draft save */
 formEl.addEventListener("change", e=>{
   if(e.target.matches('input[type=radio]')){
     const name = e.target.name;
@@ -341,12 +270,12 @@ formEl.addEventListener("change", e=>{
       }
     }
   }
-  updateProgress();
+  updateProgress(); saveDraft();
 });
-formEl.addEventListener("input", updateProgress);
+formEl.addEventListener("input", ()=>{ updateProgress(); saveDraft(); });
 
 /* ============================================================
-   PROGRESS BAR
+   PROGRESS
    ============================================================ */
 const totalQ = SECTIONS.reduce((n,s)=>n+s.questions.length,0);
 function answeredCount(){
@@ -356,8 +285,7 @@ function answeredCount(){
       const el = formEl.querySelector(`[data-qid="${q.id}"]`);
       if(el && el.value.trim()) n++;
     } else {
-      const checked = formEl.querySelector(`input[name="${q.id}"]:checked`);
-      if(checked) n++;
+      if(formEl.querySelector(`input[name="${q.id}"]:checked`)) n++;
     }
   }));
   return n;
@@ -395,173 +323,108 @@ function collectAnswers(){
 }
 
 /* ============================================================
-   SUBMIT
+   AUTO-SAVE (browser localStorage — works on the live site)
    ============================================================ */
-document.getElementById("submitBtn").addEventListener("click", async ()=>{
-  const btn = document.getElementById("submitBtn");
-  const answers = collectAnswers();
-  const entry = { submittedAt: new Date().toISOString(), answers };
-
-  btn.disabled = true;
-  btn.textContent = "Sending…";
+const DRAFT_KEY = "getfit_noman_draft";
+function saveDraft(){
   try{
-    await window.storage.set("response:"+Date.now(), JSON.stringify(entry), true);
-    document.getElementById("formView").style.display = "none";
-    document.getElementById("thanksView").style.display = "block";
-    window.scrollTo({top:0, behavior:"smooth"});
-  }catch(err){
-    btn.disabled = false;
-    btn.textContent = "Submit Answers";
-    alert("Something went wrong saving your answers. Please try again, or screenshot your answers and send them to Afreen directly.");
-    console.error(err);
-  }
-});
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(collectAnswers()));
+    showAutosaveIndicator();
+  }catch(e){}
+}
+function showAutosaveIndicator(){
+  const ind = document.getElementById("autosaveIndicator");
+  if(!ind) return;
+  ind.classList.add("show");
+  clearTimeout(ind._timer);
+  ind._timer = setTimeout(()=>ind.classList.remove("show"), 2200);
+}
+function loadDraft(){
+  try{
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if(!raw) return;
+    const answers = JSON.parse(raw);
+    SECTIONS.forEach(s=>s.questions.forEach(q=>{
+      if(q.type==="textarea"||q.type==="text"){
+        const el = formEl.querySelector(`[data-qid="${q.id}"]`);
+        if(el && answers[q.id]) el.value = answers[q.id];
+      } else if(q.type==="radio"){
+        const inp = formEl.querySelector(`input[name="${q.id}"][value="${answers[q.id]}"]`);
+        if(inp){ inp.checked = true; inp.closest(".opt").classList.add("checked"); }
+      } else if(q.type==="checkbox" && answers[q.id]){
+        answers[q.id].split(", ").forEach(v=>{
+          let matched = false;
+          formEl.querySelectorAll(`input[name="${q.id}"]`).forEach(c=>{
+            if(c.value === v){ c.checked = true; c.closest(".opt").classList.add("checked"); matched = true; }
+          });
+          if(!matched && v.startsWith("Other: ")){
+            const otherChk = formEl.querySelector(`input[name="${q.id}"][value="__other__"]`);
+            if(otherChk){
+              otherChk.checked = true; otherChk.closest(".opt").classList.add("checked");
+              const otherTxt = formEl.querySelector(`.other-text[data-other="${q.id}"]`);
+              if(otherTxt){ otherTxt.value = v.substring(7); otherTxt.classList.add("show"); }
+            }
+          }
+        });
+      }
+    }));
+    updateProgress();
+  }catch(e){}
+}
 
 /* ============================================================
-   OWNER ACCESS
+   BUILD MESSAGE
    ============================================================ */
-const pwModal = document.getElementById("pwModal");
-document.getElementById("ownerTrigger").addEventListener("click", ()=>{
-  pwModal.classList.add("open");
-  document.getElementById("pwInput").focus();
-});
-document.getElementById("pwCancel").addEventListener("click", ()=>pwModal.classList.remove("open"));
-document.getElementById("pwSubmit").addEventListener("click", checkPw);
-document.getElementById("pwInput").addEventListener("keydown", e=>{ if(e.key==="Enter") checkPw(); });
-
-function checkPw(){
-  const val = document.getElementById("pwInput").value.trim();
-  if(val === OWNER_PASSCODE){
-    pwModal.classList.remove("open");
-    document.getElementById("pwErr").style.display = "none";
-    document.getElementById("pwInput").value = "";
-    openOwnerView();
-  } else {
-    document.getElementById("pwErr").style.display = "block";
-  }
-}
-
-document.getElementById("backToForm").addEventListener("click", ()=>{
-  document.getElementById("ownerView").style.display = "none";
-  document.getElementById("formView").style.display = "block";
-});
-
-let LOADED_RESPONSES = [];
-
-async function openOwnerView(){
-  document.getElementById("formView").style.display = "none";
-  document.getElementById("thanksView").style.display = "none";
-  document.getElementById("ownerView").style.display = "block";
-  document.getElementById("respContent").innerHTML = `<div class="loading">Loading responses…</div>`;
-  window.scrollTo({top:0});
-
-  try{
-    const list = await window.storage.list("response:", true);
-    const keys = (list && list.keys) ? list.keys : [];
-    LOADED_RESPONSES = [];
-    for(const k of keys){
-      try{
-        const r = await window.storage.get(k, true);
-        if(r && r.value){ LOADED_RESPONSES.push({key:k, ...JSON.parse(r.value)}); }
-      }catch(e){ /* skip */ }
-    }
-    LOADED_RESPONSES.sort((a,b)=> new Date(b.submittedAt) - new Date(a.submittedAt));
-    renderResponses();
-  }catch(err){
-    document.getElementById("respContent").innerHTML = `<div class="empty-state">Couldn't load responses. ${err.message||""}</div>`;
-  }
-}
-
-function renderResponses(){
-  const count = LOADED_RESPONSES.length;
-  document.getElementById("respCount").textContent = count ? `(${count})` : "";
-  const tabs = document.getElementById("respTabs");
-  const content = document.getElementById("respContent");
-
-  if(count === 0){
-    tabs.innerHTML = "";
-    content.innerHTML = `<div class="empty-state">No responses yet. Once Noman submits the form, his answers will show up here.</div>`;
-    return;
-  }
-
-  tabs.innerHTML = LOADED_RESPONSES.map((r,i)=>{
-    const d = new Date(r.submittedAt);
-    const label = count>1 ? `Response ${count-i}` : "Response";
-    const date = d.toLocaleDateString(undefined,{month:"short",day:"numeric"}) + " " + d.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
-    return `<div class="resp-tab ${i===0?"active":""}" data-idx="${i}">${label} · ${date}</div>`;
-  }).join("");
-
-  tabs.querySelectorAll(".resp-tab").forEach(t=>{
-    t.addEventListener("click", ()=>{
-      tabs.querySelectorAll(".resp-tab").forEach(x=>x.classList.remove("active"));
-      t.classList.add("active");
-      showResponse(parseInt(t.dataset.idx));
-    });
-  });
-  showResponse(0);
-}
-
-function showResponse(idx){
-  const r = LOADED_RESPONSES[idx];
-  const content = document.getElementById("respContent");
-  let html = "";
+function buildMessage(answers){
+  let out = "*Get Fit by Noman — Questionnaire Response*\n";
   SECTIONS.forEach((sec,si)=>{
-    html += `<div class="resp-section"><div class="rs-head">${String(si+1).padStart(2,"0")} · ${sec.title}</div>`;
+    out += `\n*${String(si+1).padStart(2,"0")}. ${sec.title}*\n`;
     sec.questions.forEach(q=>{
-      const ans = r.answers[q.id];
-      const has = ans && ans.trim();
-      html += `<div class="resp-q">
-        <div class="rq">${q.label}</div>
-        <div class="ra ${has?"":"empty"}">${has? escapeHtml(ans) : "— no answer —"}</div>
-      </div>`;
+      const a = answers[q.id];
+      out += `\n${q.label}\n→ ${a && a.trim() ? a : "(not answered)"}\n`;
     });
-    html += `</div>`;
   });
-  content.innerHTML = html;
+  return out;
 }
 
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
+let LAST_MESSAGE = "";
 
 /* ============================================================
-   DOWNLOAD / COPY
+   SUBMIT → open WhatsApp
    ============================================================ */
-function buildPlainText(){
-  if(!LOADED_RESPONSES.length) return "No responses yet.";
-  return LOADED_RESPONSES.map((r,ri)=>{
-    const d = new Date(r.submittedAt);
-    let out = `=================================================\nRESPONSE ${LOADED_RESPONSES.length - ri}  —  ${d.toLocaleString()}\n=================================================\n`;
-    SECTIONS.forEach((sec,si)=>{
-      out += `\n--- ${String(si+1).padStart(2,"0")}. ${sec.title.toUpperCase()} ---\n`;
-      sec.questions.forEach(q=>{
-        const ans = r.answers[q.id];
-        out += `\nQ: ${q.label}\nA: ${ans && ans.trim() ? ans : "(no answer)"}\n`;
-      });
-    });
-    return out;
-  }).join("\n\n");
+function openWhatsApp(msg){
+  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
 }
 
-document.getElementById("downloadBtn").addEventListener("click", ()=>{
-  const blob = new Blob([buildPlainText()], {type:"text/plain"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "getfit-noman-responses.txt";
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
+document.getElementById("submitBtn").addEventListener("click", ()=>{
+  const answers = collectAnswers();
+  LAST_MESSAGE = buildMessage(answers);
+  openWhatsApp(LAST_MESSAGE);
+  try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
+  document.getElementById("formView").style.display = "none";
+  document.getElementById("thanksView").style.display = "block";
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+document.getElementById("resendBtn").addEventListener("click", ()=>{
+  if(LAST_MESSAGE) openWhatsApp(LAST_MESSAGE);
 });
 
 document.getElementById("copyBtn").addEventListener("click", async ()=>{
   try{
-    await navigator.clipboard.writeText(buildPlainText());
+    await navigator.clipboard.writeText(LAST_MESSAGE);
     const b = document.getElementById("copyBtn");
-    const orig = b.textContent; b.textContent = "Copied!";
-    setTimeout(()=>b.textContent=orig, 1500);
-  }catch(e){ alert("Couldn't copy automatically — use the Download button instead."); }
+    const orig = b.textContent; b.textContent = "Copied! Now paste in WhatsApp";
+    setTimeout(()=>b.textContent=orig, 2200);
+  }catch(e){
+    alert("Couldn't copy automatically. Please screenshot your answers and send them to Afreen.");
+  }
 });
 
+/* init */
 updateProgress();
+loadDraft();
 </script>
 </body>
 </html>
